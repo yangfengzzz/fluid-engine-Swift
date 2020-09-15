@@ -8,6 +8,6 @@ Renderer.arch = .GPU
 
 GPU method will launch kernel to replace Grand Center Dispatch to accelerate the simualtion.
 
-This project is still on the development which will add more render features like rayMarching and rasterization. My willingness is to use Metal to replace all Python visuallization code in [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev) and display the simulation results on the screens simultaneously.
+This project is still **on the development** which will add more render features like rayMarching and rasterization. My willingness is to use Metal to replace all Python visuallization code in [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev) and display the simulation results on the screens simultaneously.
 
 At last by not least, this project use the drawble object MTKView with SwiftUI. so It is easy to add button and text in GUI which can control the settings of the simualtion.
