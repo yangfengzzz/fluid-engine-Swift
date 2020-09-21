@@ -77,7 +77,7 @@ func copyRange2<T:ZeroInit>(input:ConstArrayAccessor2<T>,
                             output: inout ArrayAccessor2<T>) {
     parallelFor(beginIndexX: beginX, endIndexX: endX,
                 beginIndexY: beginY, endIndexY: endY){
-                    (i:size_t, j:size_t) in
+        (i:size_t, j:size_t) in
         output[i, j] = input[i, j]
     }
 }
@@ -137,8 +137,8 @@ func extrapolateToRegion(input: ConstArrayAccessor2<Float>,
                          output: inout ArrayAccessor2<Float>) {
     let size:Size2 = input.size()
     
-    assert(size == valid.size())
-    assert(size == output.size())
+    VOX_ASSERT(size == valid.size())
+    VOX_ASSERT(size == output.size())
     
     var valid0 = Array2<CChar>(size: size)
     var valid1 = Array2<CChar>(size: size)
@@ -205,8 +205,8 @@ func extrapolateToRegion(input: ConstArrayAccessor2<Vector2F>,
                          output: inout ArrayAccessor2<Vector2F>) {
     let size:Size2 = input.size()
     
-    assert(size == valid.size())
-    assert(size == output.size())
+    VOX_ASSERT(size == valid.size())
+    VOX_ASSERT(size == output.size())
     
     var valid0 = Array2<CChar>(size: size)
     var valid1 = Array2<CChar>(size: size)
@@ -273,8 +273,8 @@ func extrapolateToRegion(input: ConstArrayAccessor3<Float>,
                          output: inout ArrayAccessor3<Float>) {
     let size:Size3 = input.size()
     
-    assert(size == valid.size())
-    assert(size == output.size())
+    VOX_ASSERT(size == valid.size())
+    VOX_ASSERT(size == output.size())
     
     var valid0 = Array3<CChar>(size: size)
     var valid1 = Array3<CChar>(size: size)
@@ -351,8 +351,8 @@ func extrapolateToRegion(input: ConstArrayAccessor3<Vector3F>,
                          output: inout ArrayAccessor3<Vector3F>) {
     let size:Size3 = input.size()
     
-    assert(size == valid.size())
-    assert(size == output.size())
+    VOX_ASSERT(size == valid.size())
+    VOX_ASSERT(size == output.size())
     
     var valid0 = Array3<CChar>(size: size)
     var valid1 = Array3<CChar>(size: size)

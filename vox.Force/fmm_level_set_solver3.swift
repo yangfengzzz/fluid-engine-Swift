@@ -40,12 +40,12 @@ class FmmLevelSetSolver3: LevelSetSolver3 {
         // Solve geometrically near the boundary
         markers.forEachIndex(){(i:size_t, j:size_t, k:size_t) in
             if (isInsideSdf(phi: output[i, j, k]) &&
-                ((i > 0 && !isInsideSdf(phi: output[i - 1, j, k])) ||
-                    (i + 1 < size.x && !isInsideSdf(phi: output[i + 1, j, k])) ||
-                    (j > 0 && !isInsideSdf(phi: output[i, j - 1, k])) ||
-                    (j + 1 < size.y && !isInsideSdf(phi: output[i, j + 1, k])) ||
-                    (k > 0 && !isInsideSdf(phi: output[i, j, k - 1])) ||
-                    (k + 1 < size.z && !isInsideSdf(phi: output[i, j, k + 1])))) {
+                    ((i > 0 && !isInsideSdf(phi: output[i - 1, j, k])) ||
+                        (i + 1 < size.x && !isInsideSdf(phi: output[i + 1, j, k])) ||
+                        (j > 0 && !isInsideSdf(phi: output[i, j - 1, k])) ||
+                        (j + 1 < size.y && !isInsideSdf(phi: output[i, j + 1, k])) ||
+                        (k > 0 && !isInsideSdf(phi: output[i, j, k - 1])) ||
+                        (k + 1 < size.z && !isInsideSdf(phi: output[i, j, k + 1])))) {
                 output[i, j, k] = solveQuadNearBoundary(
                     markers: markers, output: inputSdf.dataAccessor(),
                     gridSpacing: gridSpacing,
@@ -55,12 +55,12 @@ class FmmLevelSetSolver3: LevelSetSolver3 {
         }
         markers.forEachIndex(){(i:size_t, j:size_t, k:size_t) in
             if (!isInsideSdf(phi: output[i, j, k]) &&
-                ((i > 0 && isInsideSdf(phi: output[i - 1, j, k])) ||
-                    (i + 1 < size.x && isInsideSdf(phi: output[i + 1, j, k])) ||
-                    (j > 0 && isInsideSdf(phi: output[i, j - 1, k])) ||
-                    (j + 1 < size.y && isInsideSdf(phi: output[i, j + 1, k])) ||
-                    (k > 0 && isInsideSdf(phi: output[i, j, k - 1])) ||
-                    (k + 1 < size.z && isInsideSdf(phi: output[i, j, k + 1])))) {
+                    ((i > 0 && isInsideSdf(phi: output[i - 1, j, k])) ||
+                        (i + 1 < size.x && isInsideSdf(phi: output[i + 1, j, k])) ||
+                        (j > 0 && isInsideSdf(phi: output[i, j - 1, k])) ||
+                        (j + 1 < size.y && isInsideSdf(phi: output[i, j + 1, k])) ||
+                        (k > 0 && isInsideSdf(phi: output[i, j, k - 1])) ||
+                        (k + 1 < size.z && isInsideSdf(phi: output[i, j, k + 1])))) {
                 output[i, j, k] = solveQuadNearBoundary(
                     markers: markers, output: inputSdf.dataAccessor(),
                     gridSpacing: gridSpacing,
@@ -87,12 +87,12 @@ class FmmLevelSetSolver3: LevelSetSolver3 {
             var trial = PriorityQueue<Point3UI>(sort: compare)
             markers.forEachIndex(){(i:size_t, j:size_t, k:size_t) in
                 if (markers[i, j, k] != kKnown &&
-                    ((i > 0 && markers[i - 1, j, k] == kKnown) ||
-                        (i + 1 < size.x && markers[i + 1, j, k] == kKnown) ||
-                        (j > 0 && markers[i, j - 1, k] == kKnown) ||
-                        (j + 1 < size.y && markers[i, j + 1, k] == kKnown) ||
-                        (k > 0 && markers[i, j, k - 1] == kKnown) ||
-                        (k + 1 < size.z && markers[i, j, k + 1] == kKnown))) {
+                        ((i > 0 && markers[i - 1, j, k] == kKnown) ||
+                            (i + 1 < size.x && markers[i + 1, j, k] == kKnown) ||
+                            (j > 0 && markers[i, j - 1, k] == kKnown) ||
+                            (j + 1 < size.y && markers[i, j + 1, k] == kKnown) ||
+                            (k > 0 && markers[i, j, k - 1] == kKnown) ||
+                            (k + 1 < size.z && markers[i, j, k + 1] == kKnown))) {
                     trial.enqueue(Point3UI(i, j, k))
                     markers[i, j, k] = kTrial
                 }
@@ -508,7 +508,7 @@ class FmmLevelSetSolver3: LevelSetSolver3 {
                 }
             }
             
-            assert(count > 0.0)
+            VOX_ASSERT(count > 0.0)
             
             output[i, j, k] = sum / count
             markers[i, j, k] = kKnown
@@ -575,7 +575,7 @@ func solveQuadNearBoundary(markers:Array3<CChar>,
         }
     }
     
-    assert(hasX || hasY || hasZ)
+    VOX_ASSERT(hasX || hasY || hasZ)
     
     let absCenter = abs(output[i, j, k])
     
@@ -664,7 +664,7 @@ func solveQuad(markers:Array3<CChar>,
         }
     }
     
-    assert(hasX || hasY || hasZ)
+    VOX_ASSERT(hasX || hasY || hasZ)
     
     var solution:Float = 0.0
     

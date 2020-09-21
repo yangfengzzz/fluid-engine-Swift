@@ -19,7 +19,7 @@ func laplacian(data:ConstArrayAccessor2<Float>,
     let center = data[i, j]
     let ds = data.size()
     
-    assert(i < ds.x && j < ds.y)
+    VOX_ASSERT(i < ds.x && j < ds.y)
     
     var dleft:Float = 0
     var dright:Float = 0
@@ -51,7 +51,7 @@ func laplacian(data:ConstArrayAccessor2<Vector2F>,
     let center = data[i, j]
     let ds = data.size()
     
-    assert(i < ds.x && j < ds.y)
+    VOX_ASSERT(i < ds.x && j < ds.y)
     
     var dleft = Vector2F()
     var dright = Vector2F()
@@ -253,7 +253,7 @@ extension GridForwardEulerDiffusionSolver2 {
                      pos: pos, boundarySdf: boundarySdf,
                      fluidSdf: fluidSdf)
         
-        source.parallelForEachDataPointIndex(name: "GridForwardEulerDiffusionSolver2:solve_scalar") {
+        source.parallelForEachDataPointIndex(name: "GridForwardEulerDiffusionSolver2::solve_scalar") {
             (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
             index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = dest.loadGPUBuffer(encoder: &encoder, index_begin: index)
@@ -276,7 +276,7 @@ extension GridForwardEulerDiffusionSolver2 {
                      pos: pos, boundarySdf: boundarySdf,
                      fluidSdf: fluidSdf)
         
-        source.parallelForEachDataPointIndex(name: "GridForwardEulerDiffusionSolver2:solve_collocated") {
+        source.parallelForEachDataPointIndex(name: "GridForwardEulerDiffusionSolver2::solve_collocated") {
             (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
             index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = dest.loadGPUBuffer(encoder: &encoder, index_begin: index)
@@ -299,7 +299,7 @@ extension GridForwardEulerDiffusionSolver2 {
         buildMarkers(size: source.uSize(), pos: uPos,
                      boundarySdf: boundarySdf, fluidSdf: fluidSdf)
         
-        source.parallelForEachUIndex(name: "GridForwardEulerDiffusionSolver2:solve_face") {
+        source.parallelForEachUIndex(name: "GridForwardEulerDiffusionSolver2::solve_face") {
             (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
             index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = dest.loadUBuffer(encoder: &encoder, index_begin: index)
@@ -313,7 +313,7 @@ extension GridForwardEulerDiffusionSolver2 {
         buildMarkers(size: source.vSize(), pos: vPos,
                      boundarySdf: boundarySdf, fluidSdf: fluidSdf)
         
-        source.parallelForEachVIndex(name: "GridForwardEulerDiffusionSolver2:solve_face") {
+        source.parallelForEachVIndex(name: "GridForwardEulerDiffusionSolver2::solve_face") {
             (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
             index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = dest.loadVBuffer(encoder: &encoder, index_begin: index)

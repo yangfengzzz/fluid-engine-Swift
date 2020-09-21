@@ -12,6 +12,7 @@ using namespace metal;
 #include "constants.metal"
 #include "math_utils.metal"
 #include "grid.metal"
+#include "macros.h"
 
 constant char kFluid = 0;
 
@@ -26,7 +27,7 @@ T laplacian(
     const T center = data(i, j, k);
     const uint3 ds = data.size();
     
-    assert(i < ds.x && j < ds.y && k < ds.z);
+    VOX_ASSERT(i < ds.x && j < ds.y && k < ds.z);
     
     T dleft = zero<T>();
     T dright = zero<T>();

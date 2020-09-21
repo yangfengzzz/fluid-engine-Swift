@@ -12,6 +12,7 @@
 #include <metal_stdlib>
 using namespace metal;
 #include "array_accessor.metal"
+#include "macros.h"
 
 //MARK: ArrayAccessor:-
 ///
@@ -168,13 +169,13 @@ void ArrayAccessor<T, 1>::reset(size_t size, device T* const data) {
 
 template <typename T>
 device T& ArrayAccessor<T, 1>::at(size_t i) {
-    assert(i < _size);
+    VOX_ASSERT(i < _size);
     return _data[i];
 }
 
 template <typename T>
 const device T& ArrayAccessor<T, 1>::at(size_t i) const {
-    assert(i < _size);
+    VOX_ASSERT(i < _size);
     return _data[i];
 }
 
@@ -267,7 +268,7 @@ ConstArrayAccessor<T, 1>::ConstArrayAccessor(const thread ConstArrayAccessor& ot
 
 template <typename T>
 const device T& ConstArrayAccessor<T, 1>::at(size_t i) const {
-    assert(i < _size);
+    VOX_ASSERT(i < _size);
     return _data[i];
 }
 

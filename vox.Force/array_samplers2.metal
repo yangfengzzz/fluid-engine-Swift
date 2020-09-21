@@ -14,7 +14,7 @@ using namespace metal;
 #include "array_samplers.metal"
 #include "array_accessor2.metal"
 #include "math_utils.metal"
-
+#include "macros.h"
 //MARK: NearestArraySampler:-
 ///
 /// \brief 2-D nearest array sampler class.
@@ -189,8 +189,8 @@ T NearestArraySampler2<T, R>::operator()(const float2 x) const {
     int j = 0;
     R fx, fy;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon());
     float2 normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size().x);
@@ -211,8 +211,8 @@ void NearestArraySampler2<T, R>::getCoordinate(
     int i, j;
     R fx, fy;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon());
     float2 normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size().x);
@@ -251,8 +251,8 @@ T LinearArraySampler2<T, R>::operator()(const float2 x) const {
     int i, j;
     R fx, fy;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon());
     float2 normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size().x);
@@ -281,7 +281,7 @@ void LinearArraySampler2<T, R>::getCoordinatesAndWeights(
     int i, j;
     R fx, fy;
     
-    assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0);
+    VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0);
     
     float2 normalizedX = (x - _origin) / _gridSpacing;
     
@@ -312,7 +312,7 @@ void LinearArraySampler2<T, R>::getCoordinatesAndGradientWeights(const float2 x,
     int i, j;
     R fx, fy;
     
-    assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0);
+    VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0);
     
     const float2 normalizedX = (x - _origin) * _invGridSpacing;
     
@@ -370,8 +370,8 @@ T CubicArraySampler2<T, R>::operator()(const float2 x) const {
     const int jSize = static_cast<int>(_accessor.size().y);
     R fx, fy;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon());
     const float2 normalizedX = (x - _origin) / _gridSpacing;
     
     getBarycentric(normalizedX.x, 0, iSize - 1, &i, &fx);

@@ -50,7 +50,7 @@ class CollocatedVectorGrid2: VectorGrid2 {
         let ds:Size2 = _data.size()
         let gs:Vector2F = gridSpacing()
         
-        assert(i < ds.x && j < ds.y)
+        VOX_ASSERT(i < ds.x && j < ds.y)
         
         let left:Float = _data[(i > 0) ? i - 1 : i, j].x
         let right:Float = _data[(i + 1 < ds.x) ? i + 1 : i, j].x
@@ -66,7 +66,7 @@ class CollocatedVectorGrid2: VectorGrid2 {
         let ds:Size2 = _data.size()
         let gs:Vector2F = gridSpacing()
         
-        assert(i < ds.x && j < ds.y)
+        VOX_ASSERT(i < ds.x && j < ds.y)
         
         let left:Vector2F = _data[(i > 0) ? i - 1 : i, j]
         let right:Vector2F = _data[(i + 1 < ds.x) ? i + 1 : i, j]
@@ -196,7 +196,7 @@ class CollocatedVectorGrid2: VectorGrid2 {
     
     /// Sets the data from a continuous linear array.
     override func setData(data:[Float]) {
-        assert(2 * dataSize().x * dataSize().y == data.count)
+        VOX_ASSERT(2 * dataSize().x * dataSize().y == data.count)
         
         var cnt:size_t = 0
         _data.forEachIndex(){(i:size_t, j:size_t) in
@@ -259,8 +259,8 @@ extension CollocatedVectorGrid2 {
         
         // command encoder
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-            var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-            else { return }
+              var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+        else { return }
         
         computeEncoder.setComputePipelineState(arrayPipelineState)
         let w = arrayPipelineState.threadExecutionWidth

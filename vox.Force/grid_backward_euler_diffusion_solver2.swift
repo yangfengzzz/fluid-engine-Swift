@@ -442,8 +442,11 @@ extension GridBackwardEulerDiffusionSolver2 {
         _system.b.resize(size: size, initVal: 0.0)
         var isDirichlet = (_boundaryType == .Dirichlet)
         
-        _system.x.parallelForEachIndex(name: "GridBackwardEulerDiffusionSolver2::buildVectors_scalar") {
+        let n = _system.x.size()
+        parallelFor(beginIndexX: 0, endIndexX: n.x, beginIndexY: 0, endIndexY: n.y,
+                    name: "GridBackwardEulerDiffusionSolver2::buildVectors_scalar") {
             (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
+            index = _system.x.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = _system.b.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = f.loadGPUBuffer(encoder: &encoder, index_begin: index)
@@ -462,8 +465,11 @@ extension GridBackwardEulerDiffusionSolver2 {
         _system.b.resize(size: size, initVal: 0.0)
         var isDirichlet = (_boundaryType == .Dirichlet)
         
-        _system.x.parallelForEachIndex(name: "GridBackwardEulerDiffusionSolver2::buildVectors_collocated") {
+        let n = _system.x.size()
+        parallelFor(beginIndexX: 0, endIndexX: n.x, beginIndexY: 0, endIndexY: n.y,
+                    name: "GridBackwardEulerDiffusionSolver2::buildVectors_collocated") {
             (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
+            index = _system.x.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = _system.b.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
             index = f.loadGPUBuffer(encoder: &encoder, index_begin: index)
@@ -486,8 +492,11 @@ extension GridBackwardEulerDiffusionSolver2 {
             _system.x.resize(size: size, initVal: 0.0)
             _system.b.resize(size: size, initVal: 0.0)
             
-            _system.x.parallelForEachIndex(name: "GridBackwardEulerDiffusionSolver2::buildVectors_face") {
+            let n = _system.x.size()
+            parallelFor(beginIndexX: 0, endIndexX: n.x, beginIndexY: 0, endIndexY: n.y,
+                        name: "GridBackwardEulerDiffusionSolver2::buildVectors_face") {
                 (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
+                index = _system.x.loadGPUBuffer(encoder: &encoder, index_begin: index)
                 index = _system.b.loadGPUBuffer(encoder: &encoder, index_begin: index)
                 index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
                 index = f.loadUBuffer(encoder: &encoder, index_begin: index)
@@ -501,8 +510,11 @@ extension GridBackwardEulerDiffusionSolver2 {
             _system.x.resize(size: size, initVal: 0.0)
             _system.b.resize(size: size, initVal: 0.0)
             
-            _system.x.parallelForEachIndex(name: "GridBackwardEulerDiffusionSolver2::buildVectors_face") {
+            let n = _system.x.size()
+            parallelFor(beginIndexX: 0, endIndexX: n.x, beginIndexY: 0, endIndexY: n.y,
+                        name: "GridBackwardEulerDiffusionSolver2::buildVectors_face") {
                 (encoder:inout MTLComputeCommandEncoder, index:inout Int) in
+                index = _system.x.loadGPUBuffer(encoder: &encoder, index_begin: index)
                 index = _system.b.loadGPUBuffer(encoder: &encoder, index_begin: index)
                 index = _markers.loadGPUBuffer(encoder: &encoder, index_begin: index)
                 index = f.loadVBuffer(encoder: &encoder, index_begin: index)

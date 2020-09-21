@@ -8,6 +8,15 @@
 
 import Foundation
 
+#if DEBUG
+func VOX_ASSERT(_ condition:Bool) {
+    assert(condition)
+}
+#else
+func VOX_ASSERT(_ condition:Bool) {
+}
+#endif
+
 enum KernelType: Int {
     case float = 0
     case float2 = 1
@@ -249,5 +258,5 @@ let kDirectionFront:Int = 1 << 5
 
 //! All direction.
 let kDirectionAll:Int = kDirectionLeft | kDirectionRight |
-                        kDirectionDown | kDirectionUp | kDirectionBack |
-                        kDirectionFront
+    kDirectionDown | kDirectionUp | kDirectionBack |
+    kDirectionFront

@@ -47,18 +47,18 @@ class FdmIccgSolver3: FdmLinearSystemSolver3 {
             
             b.forEachIndex(){(i:size_t, j:size_t, k:size_t) in
                 y[i, j, k] = (b[i, j, k] -
-                    ((i > 0) ? A[i - 1, j, k].right * y[i - 1, j, k] : 0.0) -
-                    ((j > 0) ? A[i, j - 1, k].up * y[i, j - 1, k] : 0.0) -
-                    ((k > 0) ? A[i, j, k - 1].front * y[i, j, k - 1] : 0.0)) * d[i, j, k]
+                                ((i > 0) ? A[i - 1, j, k].right * y[i - 1, j, k] : 0.0) -
+                                ((j > 0) ? A[i, j - 1, k].up * y[i, j - 1, k] : 0.0) -
+                                ((k > 0) ? A[i, j, k - 1].front * y[i, j, k - 1] : 0.0)) * d[i, j, k]
             }
             
             for k in stride(from: sz - 1, to: -1, by: -1) {
                 for j in stride(from: sy - 1, to: -1, by: -1) {
                     for i in stride(from: sx - 1, to: -1, by: -1) {
                         x[i, j, k] = (y[i, j, k] -
-                            ((i + 1 < sx) ? A[i, j, k].right * x[i + 1, j, k] : 0.0) -
-                            ((j + 1 < sy) ? A[i, j, k].up * x[i, j + 1, k] : 0.0) -
-                            ((k + 1 < sz) ? A[i, j, k].front * x[i, j, k + 1] : 0.0)) * d[i, j, k]
+                                        ((i + 1 < sx) ? A[i, j, k].right * x[i + 1, j, k] : 0.0) -
+                                        ((j + 1 < sy) ? A[i, j, k].up * x[i, j + 1, k] : 0.0) -
+                                        ((k + 1 < sz) ? A[i, j, k].front * x[i, j, k + 1] : 0.0)) * d[i, j, k]
                     }
                 }
             }
@@ -91,8 +91,8 @@ class FdmIccgSolver3: FdmLinearSystemSolver3 {
         var solution = system.x
         let rhs = system.b
         
-        assert(matrix.size() == rhs.size())
-        assert(matrix.size() == solution.size())
+        VOX_ASSERT(matrix.size() == rhs.size())
+        VOX_ASSERT(matrix.size() == solution.size())
         
         clearUncompressedVectors()
         

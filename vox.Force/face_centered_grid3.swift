@@ -180,7 +180,7 @@ final class FaceCenteredGrid3: VectorGrid3 {
     
     /// Returns interpolated value at cell center.
     func valueAtCellCenter(i:size_t, j:size_t, k:size_t)->Vector3F {
-        assert(i < resolution().x && j < resolution().y && k < resolution().z)
+        VOX_ASSERT(i < resolution().x && j < resolution().y && k < resolution().z)
         
         return 0.5 * Vector3F(_dataU[i, j, k] + _dataU[i + 1, j, k],
                               _dataV[i, j, k] + _dataV[i, j + 1, k],
@@ -189,7 +189,7 @@ final class FaceCenteredGrid3: VectorGrid3 {
     
     /// Returns divergence at cell-center location.
     func divergenceAtCellCenter(i:size_t, j:size_t, k:size_t)->Float {
-        assert(i < resolution().x && j < resolution().y && k < resolution().z)
+        VOX_ASSERT(i < resolution().x && j < resolution().y && k < resolution().z)
         
         let gs:Vector3F = gridSpacing()
         
@@ -208,7 +208,7 @@ final class FaceCenteredGrid3: VectorGrid3 {
     func curlAtCellCenter(i:size_t, j:size_t, k:size_t)->Vector3F {
         let res:Size3 = resolution()
         
-        assert(i < res.x && j < res.y && k < res.z)
+        VOX_ASSERT(i < res.x && j < res.y && k < res.z)
         
         let gs:Vector3F = gridSpacing()
         
@@ -349,21 +349,21 @@ final class FaceCenteredGrid3: VectorGrid3 {
                     beginIndexZ: 0, endIndexZ: _dataU.depth(),
                     function: {(i:size_t, j:size_t, k:size_t) in
                         _dataU[i, j, k] = value.x
-        }, policy: policy)
+                    }, policy: policy)
         
         parallelFor(beginIndexX: 0, endIndexX: _dataV.width(),
                     beginIndexY: 0, endIndexY: _dataV.height(),
                     beginIndexZ: 0, endIndexZ: _dataV.depth(),
                     function: {(i:size_t, j:size_t, k:size_t) in
                         _dataV[i, j, k] = value.y
-        }, policy: policy)
+                    }, policy: policy)
         
         parallelFor(beginIndexX: 0, endIndexX: _dataW.width(),
                     beginIndexY: 0, endIndexY: _dataW.height(),
                     beginIndexZ: 0, endIndexZ: _dataW.depth(),
                     function: {(i:size_t, j:size_t, k:size_t) in
                         _dataW[i, j, k] = value.z
-        }, policy: policy)
+                    }, policy: policy)
     }
     
     /// Fills the grid with given position-to-value mapping function.
@@ -375,7 +375,7 @@ final class FaceCenteredGrid3: VectorGrid3 {
                     beginIndexZ: 0, endIndexZ: _dataU.depth(),
                     function: {(i:size_t, j:size_t, k:size_t) in
                         _dataU[i, j, k] = function(uPos(i, j, k)).x
-        }, policy: policy)
+                    }, policy: policy)
         
         let vPos = vPosition()
         parallelFor(beginIndexX: 0, endIndexX: _dataV.width(),
@@ -383,7 +383,7 @@ final class FaceCenteredGrid3: VectorGrid3 {
                     beginIndexZ: 0, endIndexZ: _dataV.depth(),
                     function: {(i:size_t, j:size_t, k:size_t) in
                         _dataV[i, j, k] = function(vPos(i, j, k)).y
-        }, policy: policy)
+                    }, policy: policy)
         
         let wPos = wPosition()
         parallelFor(beginIndexX: 0, endIndexX: _dataW.width(),
@@ -391,7 +391,7 @@ final class FaceCenteredGrid3: VectorGrid3 {
                     beginIndexZ: 0, endIndexZ: _dataW.depth(),
                     function: {(i:size_t, j:size_t, k:size_t) in
                         _dataW[i, j, k] = function(wPos(i, j, k)).z
-        }, policy: policy)
+                    }, policy: policy)
     }
     
     /// Invokes the given function \p func for each u-data point.
@@ -592,9 +592,9 @@ final class FaceCenteredGrid3: VectorGrid3 {
     
     /// Sets the data from a continuous linear array.
     override func setData(data:[Float]) {
-        assert(uSize().x * uSize().y * uSize().z +
-            vSize().x * vSize().y * vSize().z +
-            wSize().x * wSize().y * wSize().z == data.count)
+        VOX_ASSERT(uSize().x * uSize().y * uSize().z +
+                    vSize().x * vSize().y * vSize().z +
+                    wSize().x * wSize().y * wSize().z == data.count)
         
         var cnt:size_t = 0
         _dataU.forEachIndex(){(i:size_t, j:size_t, k:size_t) in
@@ -789,8 +789,8 @@ extension FaceCenteredGrid3 {
         
         // command encoder
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-            var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-            else { return }
+              var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+        else { return }
         
         computeEncoder.setComputePipelineState(arrayPipelineState)
         let w = arrayPipelineState.threadExecutionWidth
@@ -836,8 +836,8 @@ extension FaceCenteredGrid3 {
         
         // command encoder
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-            var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-            else { return }
+              var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+        else { return }
         
         computeEncoder.setComputePipelineState(arrayPipelineState)
         let w = arrayPipelineState.threadExecutionWidth
@@ -883,8 +883,8 @@ extension FaceCenteredGrid3 {
         
         // command encoder
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-            var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-            else { return }
+              var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+        else { return }
         
         computeEncoder.setComputePipelineState(arrayPipelineState)
         let w = arrayPipelineState.threadExecutionWidth

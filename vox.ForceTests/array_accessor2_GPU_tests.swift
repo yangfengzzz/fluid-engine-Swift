@@ -22,7 +22,7 @@ class array_accessor2_GPU_tests: XCTestCase {
     func testParallelForEachIndex() throws {
         var arr1 = Array2<Float>(size: Size2(10, 10))
         arr1.parallelForEachIndex(name: "testParallelForEachIndex2") {
-            (_:inout MTLComputeCommandEncoder) in
+            (_:inout MTLComputeCommandEncoder, _:inout Int) in
         }
 
         let acc = arr1.accessor()
@@ -37,7 +37,8 @@ class array_accessor2_GPU_tests: XCTestCase {
                                             gridSpacingX: 1.0, gridSpacingY: 2.0,
                                             originX: 3.0, originY: 4.0, initialValue: 5.0)
         var array1 = Array2<Float>(size: Size2(5, 4))
-        array1.parallelForEachIndex(name: "testGridLoader") { (encoder:inout MTLComputeCommandEncoder) in
+        array1.parallelForEachIndex(name: "testGridLoader") {
+            (encoder:inout MTLComputeCommandEncoder, _:inout Int) in
             _ = grid1.loadGPUBuffer(encoder: &encoder, index_begin: 1)
         }
         

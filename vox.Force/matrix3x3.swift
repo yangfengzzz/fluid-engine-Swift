@@ -258,14 +258,20 @@ extension matrix_double3x3 {
     /// - Warning: Input angle should be radian.
     /// - Returns: new matrix
     static func makeRotationMatrix(axis:SIMD3<Double>, rad:Double)->matrix_double3x3{
-        return matrix_double3x3(rows: [SIMD3<Double>(1 + (1 - cos(rad)) * (axis.x * axis.x - 1),
-                                                     -axis.z * sin(rad) + (1 - cos(rad)) * axis.x * axis.y,
-                                                     axis.y * sin(rad) + (1 - cos(rad)) * axis.x * axis.z),
-                                       SIMD3<Double>(axis.z * sin(rad) + (1 - cos(rad)) * axis.x * axis.y,
-                                                     1 + (1 - cos(rad)) * (axis.y * axis.y - 1),
-                                                     -axis.x * sin(rad) + (1 - cos(rad)) * axis.y * axis.z),
-                                       SIMD3<Double>(-axis.y * sin(rad) + (1 - cos(rad)) * axis.x * axis.z,
-                                                     axis.x * sin(rad) + (1 - cos(rad)) * axis.y * axis.z,
-                                                     1 + (1 - cos(rad)) * (axis.z * axis.z - 1))])
+        let m11:Double = 1 + (1 - cos(rad)) * (axis.x * axis.x - 1)
+        let m12:Double = -axis.z * sin(rad) + (1 - cos(rad)) * axis.x * axis.y
+        let m13:Double = axis.y * sin(rad) + (1 - cos(rad)) * axis.x * axis.z
+        
+        let m21:Double = axis.z * sin(rad) + (1 - cos(rad)) * axis.x * axis.y
+        let m22:Double = 1 + (1 - cos(rad)) * (axis.y * axis.y - 1)
+        let m23:Double = -axis.x * sin(rad) + (1 - cos(rad)) * axis.y * axis.z
+        
+        let m31:Double = -axis.y * sin(rad) + (1 - cos(rad)) * axis.x * axis.z
+        let m32:Double = axis.x * sin(rad) + (1 - cos(rad)) * axis.y * axis.z
+        let m33:Double = 1 + (1 - cos(rad)) * (axis.z * axis.z - 1)
+        
+        return matrix_double3x3(rows: [SIMD3<Double>(m11, m12, m13),
+                                       SIMD3<Double>(m21, m22, m23),
+                                       SIMD3<Double>(m31, m32, m33)])
     }
 }

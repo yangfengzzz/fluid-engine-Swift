@@ -92,7 +92,7 @@ class AnisotropicPointsToImplicit3: PointsToImplicit3 {
             }
             meanNeighborSearcher.forEachNearbyPoint(origin: x, radius: r, callback: getXMean)
             
-            assert(wSum > 0.0)
+            VOX_ASSERT(wSum > 0.0)
             xMean /= wSum
             
             xMeans[i] = Math.lerp(value0: x, value1: xMean, f: _positionSmoothingFactor)

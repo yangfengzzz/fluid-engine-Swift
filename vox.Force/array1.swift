@@ -297,8 +297,12 @@ extension Array1 {
     ///   - index_begin: the begin index of buffer attribute in kernel
     /// - Returns: the end index of buffer attribute in kernel
     func loadGPUBuffer(encoder:inout MTLComputeCommandEncoder, index_begin:Int)->Int {
-        encoder.setBuffer(_data!, offset: 0, index: index_begin)
-        return index_begin + 1
+        if _data != nil {
+            encoder.setBuffer(_data!, offset: 0, index: index_begin)
+            return index_begin + 1
+        } else {
+            return index_begin
+        }
     }
     
     /// Iterates the array and invoke given \p func for each index in

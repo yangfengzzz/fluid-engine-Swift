@@ -9,6 +9,7 @@
 #include <metal_stdlib>
 using namespace metal;
 #include "vertex_centered_vector_grid2.metal"
+#include "macros.h"
 
 VertexCenteredVectorGrid2::VertexCenteredVectorGrid2(device float2* data,
                                                      const uint2 resolution,
@@ -69,7 +70,7 @@ float VertexCenteredVectorGrid2::divergenceAtDataPoint(size_t i, size_t j) const
     const uint2 ds = _const_accessor.size();
     const float2 gs = gridSpacing();
     
-    assert(i < ds.x && j < ds.y);
+    VOX_ASSERT(i < ds.x && j < ds.y);
     
     float left = _const_accessor((i > 0) ? i - 1 : i, j).x;
     float right = _const_accessor((i + 1 < ds.x) ? i + 1 : i, j).x;
@@ -84,7 +85,7 @@ float VertexCenteredVectorGrid2::curlAtDataPoint(size_t i, size_t j) const {
     const uint2 ds = _const_accessor.size();
     const float2 gs = gridSpacing();
     
-    assert(i < ds.x && j < ds.y);
+    VOX_ASSERT(i < ds.x && j < ds.y);
     
     float2 left = _const_accessor((i > 0) ? i - 1 : i, j);
     float2 right = _const_accessor((i + 1 < ds.x) ? i + 1 : i, j);

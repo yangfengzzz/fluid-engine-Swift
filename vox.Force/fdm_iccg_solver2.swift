@@ -28,8 +28,8 @@ class FdmIccgSolver2: FdmLinearSystemSolver2 {
             matrix.forEachIndex(){(i:size_t, j:size_t) in
                 let denom =
                     matrix[i, j].center -
-                        ((i > 0) ? Math.square(of: matrix[i - 1, j].right) * d[i - 1, j] : 0.0) -
-                        ((j > 0) ? Math.square(of: matrix[i, j - 1].up) * d[i, j - 1] : 0.0)
+                    ((i > 0) ? Math.square(of: matrix[i - 1, j].right) * d[i - 1, j] : 0.0) -
+                    ((j > 0) ? Math.square(of: matrix[i, j - 1].up) * d[i, j - 1] : 0.0)
                 
                 if (abs(denom) > 0.0) {
                     d[i, j] = 1.0 / denom
@@ -46,15 +46,15 @@ class FdmIccgSolver2: FdmLinearSystemSolver2 {
             
             b.forEachIndex(){(i:size_t, j:size_t) in
                 y[i, j] = (b[i, j] -
-                    ((i > 0) ? A[i - 1, j].right * y[i - 1, j] : 0.0) -
-                    ((j > 0) ? A[i, j - 1].up * y[i, j - 1] : 0.0)) * d[i, j]
+                            ((i > 0) ? A[i - 1, j].right * y[i - 1, j] : 0.0) -
+                            ((j > 0) ? A[i, j - 1].up * y[i, j - 1] : 0.0)) * d[i, j]
             }
             
             for j in stride(from: sy - 1, to: -1, by: -1) {
                 for i in stride(from: sx - 1, to: -1, by: -1) {
                     x[i, j] = (y[i, j] -
-                        ((i + 1 < sx) ? A[i, j].right * x[i + 1, j] : 0.0) -
-                        ((j + 1 < sy) ? A[i, j].up * x[i, j + 1] : 0.0)) * d[i, j]
+                                ((i + 1 < sx) ? A[i, j].right * x[i + 1, j] : 0.0) -
+                                ((j + 1 < sy) ? A[i, j].up * x[i, j + 1] : 0.0)) * d[i, j]
                 }
             }
         }
@@ -86,8 +86,8 @@ class FdmIccgSolver2: FdmLinearSystemSolver2 {
         var solution = system.x;
         let rhs = system.b;
         
-        assert(matrix.size() == rhs.size());
-        assert(matrix.size() == solution.size());
+        VOX_ASSERT(matrix.size() == rhs.size());
+        VOX_ASSERT(matrix.size() == solution.size());
         
         clearUncompressedVectors();
         
@@ -116,7 +116,7 @@ class FdmIccgSolver2: FdmLinearSystemSolver2 {
         logger.info("Residual after solving ICCG: \(_lastResidualNorm) Number of ICCG iterations: \(_lastNumberOfIterations)")
         
         return _lastResidualNorm <= _tolerance ||
-        _lastNumberOfIterations < _maxNumberOfIterations;
+            _lastNumberOfIterations < _maxNumberOfIterations;
     }
     
     /// Returns the max number of CG iterations.

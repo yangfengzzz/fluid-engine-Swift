@@ -27,7 +27,7 @@ func parallelFill<T>(array:inout [T], value:T,
     parallelFor(beginIndex: 0, endIndex: array.count,
                 function: {(i:size_t) in
                     array[i] = value;
-    }, policy: policy)
+                }, policy: policy)
 }
 
 typealias IndexCallBack = (size_t)->Void
@@ -113,7 +113,7 @@ func parallelFor(beginIndexX:Int, endIndexX:Int,
                     for i in beginIndexX..<endIndexX {
                         function(i, j)
                     }
-    }, policy: policy)
+                }, policy: policy)
 }
 
 /// Makes a 2D nested range-loop in parallel.
@@ -137,7 +137,7 @@ func parallelRangeFor(beginIndexX:Int, endIndexX:Int,
     parallelRangeFor(beginIndex: beginIndexY, endIndex: endIndexY,
                      function: { (jBegin:size_t, jEnd:size_t) in
                         function(beginIndexX, endIndexX, jBegin, jEnd)
-    }, policy: policy)
+                     }, policy: policy)
 }
 
 /// Makes a 3D nested for-loop in parallel.
@@ -167,7 +167,7 @@ func parallelFor(beginIndexX:Int, endIndexX:Int,
                             function(i, j, k)
                         }
                     }
-    }, policy: policy)
+                }, policy: policy)
 }
 
 /// Makes a 3D nested range-loop in parallel.
@@ -196,7 +196,7 @@ func parallelRangeFor(beginIndexX:Int, endIndexX:Int,
                         function(beginIndexX, endIndexX,
                                  beginIndexY, endIndexY,
                                  kBegin, kEnd)
-    }, policy: policy)
+                     }, policy: policy)
 }
 
 //MARK:- GPU Method
@@ -219,8 +219,8 @@ func parallelFor(beginIndex start:Int, endIndex end:Int,
     
     // command encoder
     guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-        var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-        else { return }
+          var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    else { return }
     
     computeEncoder.setComputePipelineState(arrayPipelineState)
     let width = arrayPipelineState.threadExecutionWidth
@@ -259,8 +259,8 @@ func parallelFor(beginIndexX:Int, endIndexX:Int,
     
     // command encoder
     guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-        var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-        else { return }
+          var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    else { return }
     
     computeEncoder.setComputePipelineState(arrayPipelineState)
     let w = arrayPipelineState.threadExecutionWidth
@@ -302,8 +302,8 @@ func parallelFor(beginIndexX:Int, endIndexX:Int,
     
     // command encoder
     guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-        var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-        else { return }
+          var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    else { return }
     
     computeEncoder.setComputePipelineState(arrayPipelineState)
     let w = arrayPipelineState.threadExecutionWidth
@@ -345,8 +345,8 @@ func parallelRangeFor(beginIndexX:Int, endIndexX:Int,
     
     // command encoder
     guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-        var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-        else { return }
+          var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    else { return }
     
     computeEncoder.setComputePipelineState(arrayPipelineState)
     let width = arrayPipelineState.threadExecutionWidth
@@ -390,8 +390,8 @@ func parallelRangeFor(beginIndexX:Int, endIndexX:Int,
     
     // command encoder
     guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-        var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-        else { return }
+          var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    else { return }
     
     computeEncoder.setComputePipelineState(arrayPipelineState)
     let width = arrayPipelineState.threadExecutionWidth

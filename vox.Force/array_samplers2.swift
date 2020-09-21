@@ -47,8 +47,8 @@ extension NearestArraySampler2 where R == Float {
             var i:ssize_t = 0, j:ssize_t = 0
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             let iSize:ssize_t = _accessor.size().x
@@ -69,8 +69,8 @@ extension NearestArraySampler2 where R == Float {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-            _gridSpacing.y > R.leastNonzeroMagnitude)
+        VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                    _gridSpacing.y > R.leastNonzeroMagnitude)
         let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
         
         let iSize:ssize_t = _accessor.size().x
@@ -99,8 +99,8 @@ extension NearestArraySampler2 where R == Double {
             var i:ssize_t = 0, j:ssize_t = 0
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             let iSize:ssize_t = _accessor.size().x
@@ -121,8 +121,8 @@ extension NearestArraySampler2 where R == Double {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-            _gridSpacing.y > R.leastNonzeroMagnitude)
+        VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                    _gridSpacing.y > R.leastNonzeroMagnitude)
         let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
         
         let iSize:ssize_t = _accessor.size().x
@@ -187,8 +187,8 @@ extension LinearArraySampler2 where R == Float, T == Float {
             var i:ssize_t = 0, j:ssize_t = 0
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             let iSize:ssize_t = _accessor.size().x
@@ -217,7 +217,7 @@ extension LinearArraySampler2 where R == Float, T == Float {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
+        VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
         
         let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
         
@@ -248,7 +248,7 @@ extension LinearArraySampler2 where R == Float, T == Float {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
+        VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
         
         let normalizedX:Vector2<R> = (x - _origin) * _invGridSpacing
         
@@ -296,8 +296,8 @@ extension LinearArraySampler2 where R == Double, T == Double {
             var i:ssize_t = 0, j:ssize_t = 0
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             let iSize:ssize_t = _accessor.size().x
@@ -326,7 +326,7 @@ extension LinearArraySampler2 where R == Double, T == Double {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
+        VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
         
         let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
         
@@ -357,7 +357,7 @@ extension LinearArraySampler2 where R == Double, T == Double {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
+        VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
         
         let normalizedX:Vector2<R> = (x - _origin) * _invGridSpacing
         
@@ -405,8 +405,8 @@ extension LinearArraySampler2 where R == Float, T == Vector2F {
             var i:ssize_t = 0, j:ssize_t = 0
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             let iSize:ssize_t = _accessor.size().x
@@ -435,7 +435,7 @@ extension LinearArraySampler2 where R == Float, T == Vector2F {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
+        VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
         
         let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
         
@@ -466,7 +466,7 @@ extension LinearArraySampler2 where R == Float, T == Vector2F {
         var i:ssize_t = 0, j:ssize_t = 0
         var fx:R = 0, fy:R = 0
         
-        assert(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
+        VOX_ASSERT(_gridSpacing.x > 0.0 && _gridSpacing.y > 0.0)
         
         let normalizedX:Vector2<R> = (x - _origin) * _invGridSpacing
         
@@ -549,8 +549,8 @@ extension CubicArraySampler2 where R == Float, T == Float {
             let jSize:ssize_t = _accessor.size().y
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             Math.getBarycentric(x: normalizedX.x, iLow: 0, iHigh: iSize - 1, i: &i, f: &fx)
@@ -603,8 +603,8 @@ extension CubicArraySampler2 where R == Double, T == Double {
             let jSize:ssize_t = _accessor.size().y
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             Math.getBarycentric(x: normalizedX.x, iLow: 0, iHigh: iSize - 1, i: &i, f: &fx)
@@ -657,8 +657,8 @@ extension CubicArraySampler2 where R == Float, T == Vector2F {
             let jSize:ssize_t = _accessor.size().y
             var fx:R = 0, fy:R = 0
             
-            assert(_gridSpacing.x > R.leastNonzeroMagnitude &&
-                _gridSpacing.y > R.leastNonzeroMagnitude)
+            VOX_ASSERT(_gridSpacing.x > R.leastNonzeroMagnitude &&
+                        _gridSpacing.y > R.leastNonzeroMagnitude)
             let normalizedX:Vector2<R> = (x - _origin) / _gridSpacing
             
             Math.getBarycentric(x: normalizedX.x, iLow: 0, iHigh: iSize - 1, i: &i, f: &fx)

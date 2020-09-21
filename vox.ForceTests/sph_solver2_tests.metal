@@ -9,9 +9,9 @@
 #include <metal_stdlib>
 using namespace metal;
 
-kernel void testNeighborListsBuffer(device float *result [[buffer(0)]],
-                                    device float *_neighborLists_buffer [[buffer(1)]],
-                                    device float *_neighborLists_index [[buffer(2)]],
+kernel void testNeighborListsBuffer(device int *result [[buffer(0)]],
+                                    device int *_neighborLists_buffer [[buffer(1)]],
+                                    device int *_neighborLists_index [[buffer(2)]],
                                     uint id [[thread_position_in_grid]],
                                     uint size [[threads_per_grid]]) {
     result[id] = _neighborLists_index[id];

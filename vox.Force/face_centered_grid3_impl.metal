@@ -9,6 +9,7 @@
 #include <metal_stdlib>
 using namespace metal;
 #include "face_centered_grid3.metal"
+#include "macros.h"
 
 FaceCenteredGrid3::FaceCenteredGrid3(device float* dataU,
                                      device float* dataV,
@@ -74,7 +75,7 @@ const float FaceCenteredGrid3::w(size_t i, size_t j, size_t k) const {
 }
 
 float3 FaceCenteredGrid3::valueAtCellCenter(size_t i, size_t j, size_t k) const {
-    assert(i < resolution().x && j < resolution().y && k < resolution().z);
+    VOX_ASSERT(i < resolution().x && j < resolution().y && k < resolution().z);
     
     return 0.5 * float3(_const_accessorU(i, j, k) + _const_accessorU(i + 1, j, k),
                         _const_accessorV(i, j, k) + _const_accessorV(i, j + 1, k),
@@ -82,7 +83,7 @@ float3 FaceCenteredGrid3::valueAtCellCenter(size_t i, size_t j, size_t k) const 
 }
 
 float FaceCenteredGrid3::divergenceAtCellCenter(size_t i, size_t j, size_t k) const {
-    assert(i < resolution().x && j < resolution().y && k < resolution().z);
+    VOX_ASSERT(i < resolution().x && j < resolution().y && k < resolution().z);
     
     const float3 gs = gridSpacing();
     
@@ -101,7 +102,7 @@ float3 FaceCenteredGrid3::curlAtCellCenter(size_t i, size_t j, size_t k) const {
     const uint3 res = resolution();
     const float3 gs = gridSpacing();
     
-    assert(i < res.x && j < res.y && k < res.z);
+    VOX_ASSERT(i < res.x && j < res.y && k < res.z);
     
     float3 left = valueAtCellCenter((i > 0) ? i - 1 : i, j, k);
     float3 right = valueAtCellCenter((i + 1 < res.x) ? i + 1 : i, j, k);

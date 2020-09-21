@@ -353,7 +353,7 @@ class SphSystemData3: ParticleSystemData3 {
             maxNumberDensity = max(maxNumberDensity, sum)
         }
         
-        assert(maxNumberDensity > 0)
+        VOX_ASSERT(maxNumberDensity > 0)
         
         let newMass = _targetDensity / maxNumberDensity
         
@@ -371,7 +371,7 @@ extension SphSystemData3 {
     }
     
     func pressures(encoder:inout MTLComputeCommandEncoder,
-                    index_begin:Int)->Int {
+                   index_begin:Int)->Int {
         return _scalarDataList[_pressureIdx]
             .loadGPUBuffer(encoder: &encoder,
                            index_begin: index_begin)

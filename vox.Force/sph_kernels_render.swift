@@ -31,12 +31,12 @@ class SphStdKernel3Renderable: Renderable {
             colorBuffer[i] = ColorUtils.makeJet(value: Float.random(in: -1.0...1.0))
         }
         
-        let IndexSize = MemoryLayout<uint32>.stride * 101
+        let IndexSize = MemoryLayout<UInt32>.stride * 101
         indexBuffer = Renderer.device.makeBuffer(length: IndexSize)!
-        var Indexpointer = indexBuffer!.contents().bindMemory(to: uint32.self,
+        var Indexpointer = indexBuffer!.contents().bindMemory(to: UInt32.self,
                                                               capacity: 101)
         for i in 0...100 {
-            Indexpointer.pointee = uint32(i)
+            Indexpointer.pointee = UInt32(i)
             Indexpointer = Indexpointer.advanced(by: 1)
         }
         

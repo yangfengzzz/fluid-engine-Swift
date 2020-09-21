@@ -16,7 +16,7 @@ func gradient2(data:ConstArrayAccessor2<Float>,
                i:size_t, j:size_t)->Vector2F {
     let ds:Size2 = data.size()
     
-    assert(i < ds.x && j < ds.y)
+    VOX_ASSERT(i < ds.x && j < ds.y)
     
     let left:Float = data[(i > 0) ? i - 1 : i, j]
     let right:Float = data[(i + 1 < ds.x) ? i + 1 : i, j]
@@ -33,7 +33,7 @@ func gradient2(data:ConstArrayAccessor2<Vector2F>,
                i:size_t, j:size_t)->[Vector2F] {
     let ds:Size2 = data.size()
     
-    assert(i < ds.x && j < ds.y)
+    VOX_ASSERT(i < ds.x && j < ds.y)
     
     let left:Vector2F = data[(i > 0) ? i - 1 : i, j]
     let right:Vector2F = data[(i + 1 < ds.x) ? i + 1 : i, j]
@@ -54,7 +54,7 @@ func laplacian2(data:ConstArrayAccessor2<Float>,
     let center:Float = data[i, j]
     let ds:Size2 = data.size()
     
-    assert(i < ds.x && j < ds.y)
+    VOX_ASSERT(i < ds.x && j < ds.y)
     
     var dleft:Float = 0.0
     var dright:Float = 0.0
@@ -87,7 +87,7 @@ func laplacian2(data:ConstArrayAccessor2<Vector2F>,
     let center:Vector2F = data[i, j]
     let ds:Size2 = data.size()
     
-    assert(i < ds.x && j < ds.y)
+    VOX_ASSERT(i < ds.x && j < ds.y)
     
     var dleft = Vector2F()
     var dright = Vector2F()
@@ -120,7 +120,7 @@ func gradient3(data:ConstArrayAccessor3<Float>,
                i:size_t, j:size_t, k:size_t)->Vector3F {
     let ds:Size3 = data.size()
     
-    assert(i < ds.x && j < ds.y && k < ds.z)
+    VOX_ASSERT(i < ds.x && j < ds.y && k < ds.z)
     
     let left:Float = data[(i > 0) ? i - 1 : i, j, k]
     let right:Float = data[(i + 1 < ds.x) ? i + 1 : i, j, k]
@@ -139,7 +139,7 @@ func gradient3(data:ConstArrayAccessor3<Vector3F>,
                i:size_t, j:size_t, k:size_t)->[Vector3F] {
     let ds:Size3 = data.size()
     
-    assert(i < ds.x && j < ds.y && k < ds.z)
+    VOX_ASSERT(i < ds.x && j < ds.y && k < ds.z)
     
     let left:Vector3F = data[(i > 0) ? i - 1 : i, j, k]
     let right:Vector3F = data[(i + 1 < ds.x) ? i + 1 : i, j, k]
@@ -150,11 +150,11 @@ func gradient3(data:ConstArrayAccessor3<Vector3F>,
     
     var result = Array<Vector3F>(repeating: Vector3F(), count: 3)
     result[0] = 0.5 * Vector3F(
-                               right.x - left.x, up.x - down.x, front.x - back.x) / gridSpacing
+        right.x - left.x, up.x - down.x, front.x - back.x) / gridSpacing
     result[1] = 0.5 * Vector3F(
-                               right.y - left.y, up.y - down.y, front.y - back.y) / gridSpacing
+        right.y - left.y, up.y - down.y, front.y - back.y) / gridSpacing
     result[2] = 0.5 * Vector3F(
-                               right.z - left.z, up.z - down.z, front.z - back.z) / gridSpacing
+        right.z - left.z, up.z - down.z, front.z - back.z) / gridSpacing
     return result
 }
 
@@ -166,7 +166,7 @@ func laplacian3(data:ConstArrayAccessor3<Float>,
     let center:Float = data[i, j, k]
     let ds:Size3 = data.size()
     
-    assert(i < ds.x && j < ds.y && k < ds.z)
+    VOX_ASSERT(i < ds.x && j < ds.y && k < ds.z)
     
     var dleft:Float = 0.0
     var dright:Float = 0.0
@@ -209,7 +209,7 @@ func laplacian3(data:ConstArrayAccessor3<Vector3F>,
     let center:Vector3F = data[i, j, k]
     let ds:Size3 = data.size()
     
-    assert(i < ds.x && j < ds.y && k < ds.z)
+    VOX_ASSERT(i < ds.x && j < ds.y && k < ds.z)
     
     var dleft:Vector3F = Vector3F()
     var dright:Vector3F = Vector3F()

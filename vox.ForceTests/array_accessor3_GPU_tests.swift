@@ -22,7 +22,7 @@ class array_accessor3_GPU_tests: XCTestCase {
     func testParallelForEachIndex() throws {
         var arr1 = Array3<Float>(size: Size3(10, 10, 10))
         arr1.parallelForEachIndex(name: "testParallelForEachIndex3") {
-            (_:inout MTLComputeCommandEncoder) in
+            (_:inout MTLComputeCommandEncoder, _:inout Int) in
         }
         
         let acc = arr1.accessor()

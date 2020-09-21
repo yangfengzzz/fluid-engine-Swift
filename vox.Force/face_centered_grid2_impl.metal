@@ -9,6 +9,7 @@
 #include <metal_stdlib>
 using namespace metal;
 #include "face_centered_grid2.metal"
+#include "macros.h"
 
 FaceCenteredGrid2::FaceCenteredGrid2(device float* dataU,
                                      device float* dataV,
@@ -61,14 +62,14 @@ const float FaceCenteredGrid2::v(size_t i, size_t j) const {
 }
 
 float2 FaceCenteredGrid2::valueAtCellCenter(size_t i, size_t j) const {
-    assert(i < resolution().x && j < resolution().y);
+    VOX_ASSERT(i < resolution().x && j < resolution().y);
     
     return 0.5 * float2(_const_accessorU(i, j) + _const_accessorU(i + 1, j),
                         _const_accessorV(i, j) + _const_accessorV(i, j + 1));
 }
 
 float FaceCenteredGrid2::divergenceAtCellCenter(size_t i, size_t j) const {
-    assert(i < resolution().x && j < resolution().y);
+    VOX_ASSERT(i < resolution().x && j < resolution().y);
     
     const float2 gs = gridSpacing();
     
@@ -83,7 +84,7 @@ float FaceCenteredGrid2::divergenceAtCellCenter(size_t i, size_t j) const {
 float FaceCenteredGrid2::curlAtCellCenter(size_t i, size_t j) const {
     const uint2 res = resolution();
     
-    assert(i < res.x && j < res.y);
+    VOX_ASSERT(i < res.x && j < res.y);
     
     const float2 gs = gridSpacing();
     

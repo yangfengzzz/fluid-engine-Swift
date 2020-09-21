@@ -92,7 +92,7 @@ extension Collider3 {
                           restitutionCoefficient:Float,
                           position newPosition:inout Vector3F,
                           velocity newVelocity:inout Vector3F) {
-        assert(_surface != nil)
+        VOX_ASSERT(_surface != nil)
         
         if (!_surface!.isValidGeometry()) {
             return
@@ -183,7 +183,7 @@ extension Collider3 {
     
     func update(currentTimeInSeconds:Double,
                 timeIntervalInSeconds:Double) {
-        assert(_surface != nil)
+        VOX_ASSERT(_surface != nil)
         
         if (!_surface!.isValidGeometry()) {
             return
@@ -197,6 +197,6 @@ extension Collider3 {
     }
     
     func setOnBeginUpdateCallback(callback:@escaping OnBeginUpdateCallback) {
-         _onUpdateCallback = callback
+        _onUpdateCallback = callback
     }
 }

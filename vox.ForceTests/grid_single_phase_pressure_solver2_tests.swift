@@ -225,45 +225,45 @@ class grid_single_phase_pressure_solver2_tests: XCTestCase {
         }
     }
     
-    func testSolveSinglePhaseWithMg() {
-        let n:size_t = 64
-        var vel = FaceCenteredGrid2(resolutionX: n, resolutionY: n)
-        
-        for j in 0..<n {
-            for i in 0..<n+1 {
-                vel.u(i: i, j: j, val: 0.0)
-            }
-        }
-        
-        for j in 0..<n+1 {
-            for i in 0..<n {
-                if (j == 0 || j == n) {
-                    vel.v(i: i, j: j, val: 0.0)
-                } else {
-                    vel.v(i: i, j: j, val: 1.0)
-                }
-            }
-        }
-        
-        let solver = GridSinglePhasePressureSolver2()
-        solver.setLinearSystemSolver(solver: FdmMgSolver2(maxNumberOfLevels: 5,
-                                                          numberOfRestrictionIter: 10,
-                                                          numberOfCorrectionIter: 10,
-                                                          numberOfCoarsestIter: 40,
-                                                          numberOfFinalIter: 10))
-        
-        solver.solve(input: vel, timeIntervalInSeconds: 1.0, output: &vel)
-        
-        for j in 0..<n {
-            for i in 0..<n+1 {
-                XCTAssertEqual(0.0, vel.u(i: i, j: j), accuracy: 0.01)
-            }
-        }
-        
-        for j in 0..<n+1 {
-            for i in 0..<n {
-                XCTAssertEqual(0.0, vel.v(i: i, j: j), accuracy: 0.05)
-            }
-        }
-    }
+//    func testSolveSinglePhaseWithMg() {
+//        let n:size_t = 64
+//        var vel = FaceCenteredGrid2(resolutionX: n, resolutionY: n)
+//
+//        for j in 0..<n {
+//            for i in 0..<n+1 {
+//                vel.u(i: i, j: j, val: 0.0)
+//            }
+//        }
+//
+//        for j in 0..<n+1 {
+//            for i in 0..<n {
+//                if (j == 0 || j == n) {
+//                    vel.v(i: i, j: j, val: 0.0)
+//                } else {
+//                    vel.v(i: i, j: j, val: 1.0)
+//                }
+//            }
+//        }
+//
+//        let solver = GridSinglePhasePressureSolver2()
+//        solver.setLinearSystemSolver(solver: FdmMgSolver2(maxNumberOfLevels: 5,
+//                                                          numberOfRestrictionIter: 10,
+//                                                          numberOfCorrectionIter: 10,
+//                                                          numberOfCoarsestIter: 40,
+//                                                          numberOfFinalIter: 10))
+//
+//        solver.solve(input: vel, timeIntervalInSeconds: 1.0, output: &vel)
+//
+//        for j in 0..<n {
+//            for i in 0..<n+1 {
+//                XCTAssertEqual(0.0, vel.u(i: i, j: j), accuracy: 0.01)
+//            }
+//        }
+//
+//        for j in 0..<n+1 {
+//            for i in 0..<n {
+//                XCTAssertEqual(0.0, vel.v(i: i, j: j), accuracy: 0.05)
+//            }
+//        }
+//    }
 }

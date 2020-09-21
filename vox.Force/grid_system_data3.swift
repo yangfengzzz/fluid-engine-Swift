@@ -73,9 +73,9 @@ class GridSystemData3 {
             _advectableVectorDataList.append(data.clone())
         }
         
-        assert(self._advectableVectorDataList.count > 0)
+        VOX_ASSERT(self._advectableVectorDataList.count > 0)
         self._velocity = _advectableVectorDataList[0] as? FaceCenteredGrid3
-        assert(_velocity != nil)
+        VOX_ASSERT(_velocity != nil)
         self._velocityIdx = 0
     }
     

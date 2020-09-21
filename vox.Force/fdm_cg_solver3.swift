@@ -35,8 +35,8 @@ class FdmCgSolver3: FdmLinearSystemSolver3 {
         var solution = system.x
         let rhs = system.b
         
-        assert(matrix.size() == rhs.size())
-        assert(matrix.size() == solution.size())
+        VOX_ASSERT(matrix.size() == rhs.size())
+        VOX_ASSERT(matrix.size() == solution.size())
         
         clearUncompressedVectors()
         

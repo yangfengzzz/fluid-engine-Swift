@@ -43,12 +43,12 @@ class AnimationRenderable: Renderable {
             bufferpointer = bufferpointer.advanced(by: 1)
         }
         
-        let IndexSize = MemoryLayout<uint32>.stride * 240
+        let IndexSize = MemoryLayout<UInt32>.stride * 240
         indexBuffer = Renderer.device.makeBuffer(length: IndexSize)!
-        var Indexpointer = indexBuffer!.contents().bindMemory(to: uint32.self,
+        var Indexpointer = indexBuffer!.contents().bindMemory(to: UInt32.self,
                                                               capacity: 240)
         for i in 0..<240 {
-            Indexpointer.pointee = uint32(i)
+            Indexpointer.pointee = UInt32(i)
             Indexpointer = Indexpointer.advanced(by: 1)
         }
         

@@ -12,6 +12,7 @@
 #include <metal_stdlib>
 using namespace metal;
 #include "array_accessor.metal"
+#include "macros.h"
 
 //MARK: ArrayAccessor:-
 ///
@@ -262,13 +263,13 @@ void ArrayAccessor<T, 2>::reset(size_t width, size_t height, device T* const dat
 
 template <typename T>
 device T& ArrayAccessor<T, 2>::at(size_t i) {
-    assert(i < _size.x*_size.y);
+    VOX_ASSERT(i < _size.x*_size.y);
     return _data[i];
 }
 
 template <typename T>
 const device T& ArrayAccessor<T, 2>::at(size_t i) const {
-    assert(i < _size.x*_size.y);
+    VOX_ASSERT(i < _size.x*_size.y);
     return _data[i];
 }
 
@@ -284,13 +285,13 @@ const device T& ArrayAccessor<T, 2>::at(const uint2 pt) const {
 
 template <typename T>
 device T& ArrayAccessor<T, 2>::at(size_t i, size_t j) {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return _data[i + _size.x * j];
 }
 
 template <typename T>
 const device T& ArrayAccessor<T, 2>::at(size_t i, size_t j) const {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return _data[i + _size.x * j];
 }
 
@@ -347,13 +348,13 @@ void ArrayAccessor<T, 2>::swap(thread ArrayAccessor& other) {
 
 template <typename T>
 size_t ArrayAccessor<T, 2>::index(const uint2 pt) const {
-    assert(pt.x < _size.x && pt.y < _size.y);
+    VOX_ASSERT(pt.x < _size.x && pt.y < _size.y);
     return pt.x + _size.x * pt.y;
 }
 
 template <typename T>
 size_t ArrayAccessor<T, 2>::index(size_t i, size_t j) const {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return i + _size.x * j;
 }
 
@@ -369,25 +370,25 @@ const device T& ArrayAccessor<T, 2>::operator[](size_t i) const {
 
 template <typename T>
 device T& ArrayAccessor<T, 2>::operator()(const uint2 pt) {
-    assert(pt.x < _size.x && pt.y < _size.y);
+    VOX_ASSERT(pt.x < _size.x && pt.y < _size.y);
     return _data[pt.x + _size.x * pt.y];
 }
 
 template <typename T>
 const device T& ArrayAccessor<T, 2>::operator()(const uint2 pt) const {
-    assert(pt.x < _size.x && pt.y < _size.y);
+    VOX_ASSERT(pt.x < _size.x && pt.y < _size.y);
     return _data[pt.x + _size.x * pt.y];
 }
 
 template <typename T>
 device T& ArrayAccessor<T, 2>::operator()(size_t i, size_t j) {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return _data[i + _size.x * j];
 }
 
 template <typename T>
 const device T& ArrayAccessor<T, 2>::operator()(size_t i, size_t j) const {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return _data[i + _size.x * j];
 }
 
@@ -436,7 +437,7 @@ ConstArrayAccessor<T, 2>::ConstArrayAccessor(const thread ConstArrayAccessor& ot
 
 template <typename T>
 const device T& ConstArrayAccessor<T, 2>::at(size_t i) const {
-    assert(i < _size.x*_size.y);
+    VOX_ASSERT(i < _size.x*_size.y);
     return _data[i];
 }
 
@@ -447,7 +448,7 @@ const device T& ConstArrayAccessor<T, 2>::at(const uint2 pt) const {
 
 template <typename T>
 const device T& ConstArrayAccessor<T, 2>::at(size_t i, size_t j) const {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return _data[i + _size.x * j];
 }
 
@@ -483,13 +484,13 @@ const device T* const ConstArrayAccessor<T, 2>::data() const {
 
 template <typename T>
 size_t ConstArrayAccessor<T, 2>::index(const uint2 pt) const {
-    assert(pt.x < _size.x && pt.y < _size.y);
+    VOX_ASSERT(pt.x < _size.x && pt.y < _size.y);
     return pt.x + _size.x * pt.y;
 }
 
 template <typename T>
 size_t ConstArrayAccessor<T, 2>::index(size_t i, size_t j) const {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return i + _size.x * j;
 }
 
@@ -500,13 +501,13 @@ const device T& ConstArrayAccessor<T, 2>::operator[](size_t i) const {
 
 template <typename T>
 const device T& ConstArrayAccessor<T, 2>::operator()(const uint2 pt) const {
-    assert(pt.x < _size.x && pt.y < _size.y);
+    VOX_ASSERT(pt.x < _size.x && pt.y < _size.y);
     return _data[pt.x + _size.x * pt.y];
 }
 
 template <typename T>
 const device T& ConstArrayAccessor<T, 2>::operator()(size_t i, size_t j) const {
-    assert(i < _size.x && j < _size.y);
+    VOX_ASSERT(i < _size.x && j < _size.y);
     return _data[i + _size.x * j];
 }
 

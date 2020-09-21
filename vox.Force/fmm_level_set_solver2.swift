@@ -49,10 +49,10 @@ class FmmLevelSetSolver2: LevelSetSolver2 {
         // Solve geometrically near the boundary
         markers.forEachIndex(){(i:size_t, j:size_t) in
             if (!isInsideSdf(phi: output[i, j])
-                && ((i > 0 && isInsideSdf(phi: output[i - 1, j]))
-                    || (i + 1 < size.x && isInsideSdf(phi: output[i + 1, j]))
-                    || (j > 0 && isInsideSdf(phi: output[i, j - 1]))
-                    || (j + 1 < size.y && isInsideSdf(phi: output[i, j + 1])))) {
+                    && ((i > 0 && isInsideSdf(phi: output[i - 1, j]))
+                            || (i + 1 < size.x && isInsideSdf(phi: output[i + 1, j]))
+                            || (j > 0 && isInsideSdf(phi: output[i, j - 1]))
+                            || (j + 1 < size.y && isInsideSdf(phi: output[i, j + 1])))) {
                 output[i, j] = solveQuadNearBoundary(
                     markers: markers,
                     output: output,
@@ -60,10 +60,10 @@ class FmmLevelSetSolver2: LevelSetSolver2 {
                     invGridSpacingSqr: invGridSpacingSqr,
                     sign: 1.0, i: i, j: j)
             } else if (isInsideSdf(phi: output[i, j])
-                && ((i > 0 && !isInsideSdf(phi: output[i - 1, j]))
-                    || (i + 1 < size.x && !isInsideSdf(phi: output[i + 1, j]))
-                    || (j > 0 && !isInsideSdf(phi: output[i, j - 1]))
-                    || (j + 1 < size.y && !isInsideSdf(phi: output[i, j + 1])))) {
+                        && ((i > 0 && !isInsideSdf(phi: output[i - 1, j]))
+                                || (i + 1 < size.x && !isInsideSdf(phi: output[i + 1, j]))
+                                || (j > 0 && !isInsideSdf(phi: output[i, j - 1]))
+                                || (j + 1 < size.y && !isInsideSdf(phi: output[i, j + 1])))) {
                 output[i, j] = solveQuadNearBoundary(
                     markers: markers,
                     output: output,
@@ -91,10 +91,10 @@ class FmmLevelSetSolver2: LevelSetSolver2 {
             var trial = PriorityQueue<Point2UI>(sort: compare)
             markers.forEachIndex(){(i:size_t, j:size_t) in
                 if (markers[i, j] != kKnown
-                    && ((i > 0 && markers[i - 1, j] == kKnown)
-                        || (i + 1 < size.x && markers[i + 1, j] == kKnown)
-                        || (j > 0 && markers[i, j - 1] == kKnown)
-                        || (j + 1 < size.y && markers[i, j + 1] == kKnown))) {
+                        && ((i > 0 && markers[i - 1, j] == kKnown)
+                                || (i + 1 < size.x && markers[i + 1, j] == kKnown)
+                                || (j > 0 && markers[i, j - 1] == kKnown)
+                                || (j + 1 < size.y && markers[i, j + 1] == kKnown))) {
                     trial.enqueue(Point2UI(i, j))
                     markers[i, j] = kTrial
                 }
@@ -446,7 +446,7 @@ class FmmLevelSetSolver2: LevelSetSolver2 {
                 }
             }
             
-            assert(count > 0.0)
+            VOX_ASSERT(count > 0.0)
             
             output[i, j] = sum / count
             markers[i, j] = kKnown
@@ -496,15 +496,15 @@ func solveQuadNearBoundary(markers:Array2<CChar>,
         }
     }
     
-    assert(hasX || hasY)
+    VOX_ASSERT(hasX || hasY)
     
     let distToBndX
         = gridSpacing.x * abs(output[i, j])
-            / (abs(output[i, j]) + abs(phiX))
+        / (abs(output[i, j]) + abs(phiX))
     
     let distToBndY
         = gridSpacing.y * abs(output[i, j])
-            / (abs(output[i, j]) + abs(phiY))
+        / (abs(output[i, j]) + abs(phiY))
     
     var solution:Float = 0
     var denomSqr:Float = 0.0
@@ -562,7 +562,7 @@ func solveQuad(markers:Array2<CChar>,
         }
     }
     
-    assert(hasX || hasY)
+    VOX_ASSERT(hasX || hasY)
     
     var solution:Float = 0.0
     

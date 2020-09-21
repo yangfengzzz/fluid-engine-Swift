@@ -178,7 +178,7 @@ T NearestArraySampler1<T, R>::operator()(R x) const {
     int i;
     R fx;
     
-    assert(_gridSpacing > std::numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing > std::numeric_limits<R>::epsilon());
     R normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size());
@@ -194,7 +194,7 @@ template <typename T, typename R>
 void NearestArraySampler1<T, R>::getCoordinate(R x, thread size_t* i) const {
     R fx;
     
-    assert(_gridSpacing > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing > numeric_limits<R>::epsilon());
     R normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size());
@@ -229,7 +229,7 @@ T LinearArraySampler1<T, R>::operator()(R x) const {
     int i;
     R fx;
     
-    assert(_gridSpacing > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing > numeric_limits<R>::epsilon());
     R normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size());
@@ -250,7 +250,7 @@ void LinearArraySampler1<T, R>::getCoordinatesAndWeights(R x, thread size_t* i0,
     int i;
     R fx;
     
-    assert(_gridSpacing > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing > numeric_limits<R>::epsilon());
     R normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size());
@@ -290,7 +290,7 @@ T CubicArraySampler1<T, R>::operator()(R x) const {
     int iSize = static_cast<int>(_accessor.size());
     R fx;
     
-    assert(_gridSpacing > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing > numeric_limits<R>::epsilon());
     R normalizedX = (x - _origin) / _gridSpacing;
     
     getBarycentric(normalizedX, 0, iSize - 1, &i, &fx);

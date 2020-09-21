@@ -210,7 +210,7 @@ extension FdmGaussSeidelSolver3 {
         // Red update
         parallelRangeFor(beginIndexX: 0, endIndexX: size.x,
                          beginIndexY: 0, endIndexY: size.y,
-                         beginIndexZ: 0, endIndexZ: size.z, name: "FdmGaussSeidelSolver3:red") {
+                         beginIndexZ: 0, endIndexZ: size.z, name: "FdmGaussSeidelSolver3::red") {
                             (encode:inout MTLComputeCommandEncoder, index:inout Int) in
                             index = A.loadGPUBuffer(encoder: &encode, index_begin: index)
                             index = b.loadGPUBuffer(encoder: &encode, index_begin: index)
@@ -221,7 +221,7 @@ extension FdmGaussSeidelSolver3 {
         // Black update
         parallelRangeFor(beginIndexX: 0, endIndexX: size.x,
                          beginIndexY: 0, endIndexY: size.y,
-                         beginIndexZ: 0, endIndexZ: size.z, name: "FdmGaussSeidelSolver3:black") {
+                         beginIndexZ: 0, endIndexZ: size.z, name: "FdmGaussSeidelSolver3::black") {
                             (encode:inout MTLComputeCommandEncoder, index:inout Int) in
                             index = A.loadGPUBuffer(encoder: &encode, index_begin: index)
                             index = b.loadGPUBuffer(encoder: &encode, index_begin: index)

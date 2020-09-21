@@ -72,12 +72,12 @@ class point_hash_grid_searcher3_tests: XCTestCase {
                                                    gridSpacing: 0.18)
         pointSearcher.build(points: points.constAccessor())
         
-        var grid = Array3<size_t>(width: 4, height: 4, depth: 4)
+        var grid = Array3<Int32>(width: 4, height: 4, depth: 4)
         
         grid.forEachIndex(){(i:size_t, j:size_t, k:size_t) in
             let key = pointSearcher.getHashKeyFromBucketIndex(bucketIndex: Point3I(i, j, k))
             let value = pointSearcher.buckets()[key].count
-            grid[i, j, k] = value
+            grid[i, j, k] = Int32(value)
         }
         
         let parallelSearcher = PointParallelHashGridSearcher3(resolutionX: 4, resolutionY: 4, resolutionZ: 4,
@@ -89,7 +89,7 @@ class point_hash_grid_searcher3_tests: XCTestCase {
             let start = parallelSearcher.startIndexTable()[key]
             let end = parallelSearcher.endIndexTable()[key]
             let value = end - start
-            XCTAssertEqual(grid[i, j, k], value)
+            XCTAssertEqual(grid[i, j, k], Int32(value))
         }
     }
     

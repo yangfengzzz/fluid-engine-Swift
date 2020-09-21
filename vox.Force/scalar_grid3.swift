@@ -148,7 +148,7 @@ class ScalarGrid3: Grid3&ScalarField3 {
                     beginIndexZ: 0, endIndexZ: _data.depth(),
                     function: { (i:size_t, j:size_t, k:size_t) in
                         _data[i, j, k] = value
-        }, policy: policy)
+                    }, policy: policy)
     }
     
     /// Fills the grid with given position-to-value mapping function.
@@ -160,7 +160,7 @@ class ScalarGrid3: Grid3&ScalarField3 {
                     beginIndexZ: 0, endIndexZ: _data.depth(),
                     function: { (i:size_t, j:size_t, k:size_t) in
                         _data[i, j, k] = function(pos(i, j, k))
-        }, policy: policy)
+                    }, policy: policy)
     }
     
     /// Invokes the given function \p func for each data point.
@@ -270,7 +270,7 @@ class ScalarGrid3: Grid3&ScalarField3 {
     
     /// Sets the data from a continuous linear array.
     override func setData(data:[Float]) {
-        assert(dataSize().x * dataSize().y == data.count)
+        VOX_ASSERT(dataSize().x * dataSize().y == data.count)
         for i in 0..<data.count {
             _data[i] = data[i]
         }
@@ -322,8 +322,8 @@ extension ScalarGrid3 {
         
         // command encoder
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-            var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-            else { return }
+              var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+        else { return }
         
         computeEncoder.setComputePipelineState(arrayPipelineState)
         let w = arrayPipelineState.threadExecutionWidth

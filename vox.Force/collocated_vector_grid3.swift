@@ -50,7 +50,7 @@ class CollocatedVectorGrid3: VectorGrid3 {
         let ds:Size3 = _data.size()
         let gs:Vector3F = gridSpacing()
         
-        assert(i < ds.x && j < ds.y && k < ds.z)
+        VOX_ASSERT(i < ds.x && j < ds.y && k < ds.z)
         
         let left:Float = _data[(i > 0) ? i - 1 : i, j, k].x
         let right:Float = _data[(i + 1 < ds.x) ? i + 1 : i, j, k].x
@@ -69,7 +69,7 @@ class CollocatedVectorGrid3: VectorGrid3 {
         let ds:Size3 = _data.size()
         let gs:Vector3F = gridSpacing()
         
-        assert(i < ds.x && j < ds.y && k < ds.z)
+        VOX_ASSERT(i < ds.x && j < ds.y && k < ds.z)
         
         let left:Vector3F = _data[(i > 0) ? i - 1 : i, j, k]
         let right:Vector3F = _data[(i + 1 < ds.x) ? i + 1 : i, j, k]
@@ -214,7 +214,7 @@ class CollocatedVectorGrid3: VectorGrid3 {
     
     /// Sets the data from a continuous linear array.
     override func setData(data:[Float]) {
-        assert(3 * dataSize().x * dataSize().y * dataSize().z == data.count)
+        VOX_ASSERT(3 * dataSize().x * dataSize().y * dataSize().z == data.count)
         
         var cnt:size_t = 0
         _data.forEachIndex(){(i:size_t, j:size_t, k:size_t) in
@@ -278,8 +278,8 @@ extension CollocatedVectorGrid3 {
         
         // command encoder
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-            var computeEncoder = commandBuffer.makeComputeCommandEncoder()
-            else { return }
+              var computeEncoder = commandBuffer.makeComputeCommandEncoder()
+        else { return }
         
         computeEncoder.setComputePipelineState(arrayPipelineState)
         let w = arrayPipelineState.threadExecutionWidth

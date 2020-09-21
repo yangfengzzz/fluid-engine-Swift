@@ -23,7 +23,8 @@ class array_samplers_GPU_tests: XCTestCase {
         var grid = Array1<Float>(lst: [ 1.0, 2.0, 3.0, 4.0 ])
         let output = Array1<Float>(lst: [ 10.0, 20.0, 30.0, 40.0 ])
         
-        grid.parallelForEachIndex(name: "testNearestArraySampler1") { (encoder: inout MTLComputeCommandEncoder) in
+        grid.parallelForEachIndex(name: "testNearestArraySampler1") {
+            (encoder: inout MTLComputeCommandEncoder, _:inout Int) in
             encoder.setBuffer(output._data, offset: 0, index: 1)
         }
         

@@ -14,6 +14,7 @@ using namespace metal;
 #include "array_samplers.metal"
 #include "array_accessor3.metal"
 #include "math_utils.metal"
+#include "macros.h"
 
 //MARK: NearestArraySampler:-
 //!
@@ -191,9 +192,9 @@ T NearestArraySampler3<T, R>::operator()(const float3 x) const {
     int i, j, k;
     R fx, fy, fz;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon() &&
-           _gridSpacing.z > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon() &&
+               _gridSpacing.z > numeric_limits<R>::epsilon());
     float3 normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size().x);
@@ -217,9 +218,9 @@ void NearestArraySampler3<T, R>::getCoordinate(
     int i, j, k;
     R fx, fy, fz;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon() &&
-           _gridSpacing.z > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon() &&
+               _gridSpacing.z > numeric_limits<R>::epsilon());
     float3 normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size().x);
@@ -261,9 +262,9 @@ T LinearArraySampler3<T, R>::operator()(const float3 x) const {
     int i, j, k;
     R fx, fy, fz;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon() &&
-           _gridSpacing.z > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon() &&
+               _gridSpacing.z > numeric_limits<R>::epsilon());
     float3 normalizedX = (x - _origin) / _gridSpacing;
     
     int iSize = static_cast<int>(_accessor.size().x);
@@ -300,8 +301,8 @@ void LinearArraySampler3<T, R>::getCoordinatesAndWeights(
     int i, j, k;
     R fx, fy, fz;
     
-    assert(
-           _gridSpacing.x > 0.0 && _gridSpacing.y > 0.0 && _gridSpacing.z > 0.0);
+    VOX_ASSERT(
+               _gridSpacing.x > 0.0 && _gridSpacing.y > 0.0 && _gridSpacing.z > 0.0);
     
     const float3 normalizedX = (x - _origin) * _invGridSpacing;
     
@@ -344,8 +345,8 @@ void LinearArraySampler3<T, R>::getCoordinatesAndGradientWeights(
     int i, j, k;
     R fx, fy, fz;
     
-    assert(
-           _gridSpacing.x > 0.0 && _gridSpacing.y > 0.0 && _gridSpacing.z > 0.0);
+    VOX_ASSERT(
+               _gridSpacing.x > 0.0 && _gridSpacing.y > 0.0 && _gridSpacing.z > 0.0);
     
     float3 normalizedX = (x - _origin) / _gridSpacing;
     
@@ -432,9 +433,9 @@ T CubicArraySampler3<T, R>::operator()(const float3 x) const {
     int kSize = static_cast<int>(_accessor.size().z);
     R fx, fy, fz;
     
-    assert(_gridSpacing.x > numeric_limits<R>::epsilon() &&
-           _gridSpacing.y > numeric_limits<R>::epsilon() &&
-           _gridSpacing.z > numeric_limits<R>::epsilon());
+    VOX_ASSERT(_gridSpacing.x > numeric_limits<R>::epsilon() &&
+               _gridSpacing.y > numeric_limits<R>::epsilon() &&
+               _gridSpacing.z > numeric_limits<R>::epsilon());
     float3 normalizedX = (x - _origin) / _gridSpacing;
     
     getBarycentric(normalizedX.x, 0, iSize - 1, &i, &fx);

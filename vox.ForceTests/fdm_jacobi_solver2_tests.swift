@@ -24,7 +24,7 @@ class fdm_jacobi_solver2_tests: XCTestCase {
         FdmLinearSystemSolverTestHelper2.buildTestLinearSystem(system: &system, size: [3, 3])
         
         let solver = FdmJacobiSolver2(maxNumberOfIterations: 100,
-                                      residualCheckInterval: 10, tolerance: 1e-9)
+                                      residualCheckInterval: 10, tolerance: 1e-6)
         _ = solver.solve(system: &system)
         
         XCTAssertGreaterThan(solver.tolerance(), solver.lastResidual())
